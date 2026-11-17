@@ -1,0 +1,163 @@
+<!Doctype html>
+<head>
+<title>Nice$$</title>
+</head>
+<style>
+    :root {
+        --table-color: black;
+        --paper-color: beige;
+        --shadow-effect: 0px 0px 25px 8px rgba(255, 255, 255, 0.7);
+        --border-style: none;
+    }
+    [data-theme="dark"] {
+        --table-color: black;
+        --paper-color: black;
+        --shadow-effect: 0px 0px 25px 8px rgba(255, 255, 255, 0.95);
+        --border-style: 1px solid #333333;
+    }
+    html{
+        background-color: var(--table-color);
+        transition: background-color 0.4s ease;
+        position: relative;
+        min-height: 100%
+    }
+    body{
+        max-width: 800px;
+        background-color: var(--paper-color);
+        margin: 60px auto;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-effect);
+        border: var(--border-style)
+        transition background-color 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+    }
+    .theme-toggle-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 8px 16px;
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 1px solid gray;
+        background-color: beige;
+        color: black;
+        z-index: 1000;
+    }
+    .theme-toggle-btn:hover {
+        background-color: white;
+    }
+    p{
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    h1{
+        text-align: center;
+        font-size: 50px;
+        color: #333333;
+        font-weight: bold;
+        
+    }
+.shimmer-text{
+    background: linear-gradient(to right, gold, gray, pink, purple,green,white,black, red,navy,chocolate,brown,pink,purple,orange,indigo,aqua);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+}
+@keyframes shine {
+    to{
+        background-position: 200% center;
+    }
+}
+.nav-link-wrapper {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    text-decoration: none;
+}
+.action-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #2c3e50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: back-ground-color 0.3s ease;
+}
+.action-btn:hover {
+    background-color: #34495e
+}
+</style>
+<body>
+    <h1>hi!😊</h1>
+    <button class="theme-toggle-btn" id="themeBtn">Switch Theme</button>
+    <p style="background-image: linear-gradient(to right,red,orange,yellow,green,aqua,rgb(65, 65, 187),blueviolet);">
+        Hello, <span class="shimmer-text">This is my first tryout of coding using html without prompting,copying and pasting.</span>I 'm gonna try to make it look creative but I 'm sorry in case you do n't like it.    </p>
+<p style="background-color: red;">
+    As told above, my name is Nice. I am a student at RCA. 
+    My home location is Kigali,Rwanda.
+    I am 15 years old.
+    I love nothing more than a peaceful life.
+
+</p>
+<p style="background-color: orange; color:darkblue;">
+    I am going to make a rainbow right on this page and 
+    I 'm gonna make sure it is as colourful as it could 
+    ever be.
+</p>
+<p style="background-color: yellow; color:green">
+    Well, this is so exciting and I am so proud of myself.
+     I.e, I finally gathered the courage to be interested 
+     in what I am studying and I am making a very good progress.
+</p>
+<p style="background-color: green; color:yellow;">
+    Everyone has a compelling purpose in what they do and for me,
+     the purpose compelling me to learn programming is because 
+     it's more interesting than the rest of the options available 
+     in advanced level of Rwandan highschools.
+</p>
+<p style="background-color: aqua; color:gray;">
+    Other options available include stream one which involves
+     Biology and Chemistry; two subjects I do n't wanna see ever
+      in my eyesight. The other option is stream two and it also
+       involves Geography and Economy which makes it the worst option
+        of all becaue I hate economy so much.
+</p>
+<p style="background-color: rgb(71, 71, 153); color:white;">
+    Currently, I am attending the gym program which is a program 
+    that helps us to improve our soft skills and I think I'am really making a good progress. 
+</p>
+<p style="background-color: blueviolet; color:white;">
+    I'm already 15 and it feels like I'm a grown up I wonder how it will be like when I finally become 18.
+</p>
+<p style="background-image: linear-gradient(to right,pink,navy);">
+    Enough talk, if you are interested I would like to share more. KEEP GOING.
+</p>
+<a href="tryouts2.html" class="nav-link-wrapper">
+    <button class="action-btn">Keep going!!</button>
+</a>
+<script>
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            themeBtn.textContent = "Switch to Dark Mode";
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeBtn.textContent = "Switch to Light Mode";
+        }
+    });
+</script> 
+</body>
+</html>
+

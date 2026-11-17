@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Minor</title>
+    <style>
+        /* 1. Theme Variables matching your main page */
+        :root {
+            --table-color: black;
+            --paper-color: beige;
+            --shadow-effect: 0px 0px 25px 8px rgba(255, 255, 255, 0.95);
+            --border-style: none;
+            --text-color: #333333;
+            --image-shadow: 0px 0px 15px 2px black;
+        }
+
+        [data-theme="dark"] {
+            --table-color: black;
+            --paper-color: black;
+            --shadow-effect: 0px 0px 25px 8px rgba(255, 255, 255, 0.95);
+            --border-style: 1px solid #333333;
+            --text-color: #ffffff;
+            --image-shadow: 0px 0px 15px 2px white
+        }
+
+        /* 2. Base Page Structure */
+        html {
+            background-color: var(--table-color);
+            transition: background-color 0.4s ease;
+            position: relative;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Stops hearts from creating horizontal scrollbars */
+        }
+
+        body {
+            max-width: 800px;
+            width: 90%;
+            background-color: var(--paper-color);
+            margin: 60px auto;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-effect);
+            border: var(--border-style);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 10; /* Keeps content layered in front of rising hearts */
+        }
+
+        /* --- THEME TOGGLE BUTTON --- */
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: 1px solid #555555;
+            background-color: #ffffff;
+            color: #000000;
+            z-index: 1000;
+        }
+
+        /* --- FLEXBOX ENGINE: Header Section --- */
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .main-message {
+            font-size: 36px;
+            font-weight: bold;
+            font-style: italic;
+            color: var(--text-color);
+            margin: 20px 0;
+            transition: color 0.4s ease;
+        }
+
+        .cat-gallery {
+    display: grid;
+    
+    /* 
+       THE SYSTEM OVERRIDE: 
+       Instead of auto-fitting, this forces the browser to create exactly 
+       3 equal columns side-by-side no matter how small the screen gets!
+    */
+    grid-template-columns: repeat(3, 1fr); 
+    
+    /* Uniform layout gutters between rows and columns */
+    gap: 15px; 
+    justify-items: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+        .cat-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;      
+            box-shadow: var(--image-shadow);
+            transition: all 0.4s ease;
+        }
+
+        .cat-photo:hover {
+            transform: scale(1.08);
+        }
+        .heart-container {
+            position: fixed;
+            bottom: -50px;                 
+            font-size: 24px;
+            pointer-events: none;        
+            z-index: 1;               
+            animation: rise 6s linear infinite;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-110vh) translateX(50px); 
+                opacity: 0;
+            }
+        } 
+        .shimmer-text{
+    background: linear-gradient(to right, blue, aqua, pink, blueviolet, indigo);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+    font-size: 60px;
+    font-style: italic;
+    font-weight: bold;
+}      
+    </style>
+</head>
+<body>
+
+    <!-- Theme Switch Button -->
+    <button class="theme-toggle-btn" id="themeBtn">Switch Theme</button>
+    <div class="cat-gallery">
+        <img src="cat1.jpg" alt="Cute Cat" class="cat-photo">
+        <img src="cat2.jpg" alt="Cute Cat" class="cat-photo">
+        <img src="cat3.jpg" alt="Cute Cat" class="cat-photo">
+        <img src="cat4.png" alt="Cute Cat" class="cat-photo">
+        <img src="cat5.png" alt="Cute Cat" class="cat-photo">
+        <img src="cat6.png" alt="Cute Cat" class="cat-photo">
+        <img src="cat7.png" alt="Cute Cat" class="cat-photo">
+        <img src="cat8.png" alt="Cute Cat" class="cat-photo">
+        <img src="cat9.png" alt="Cute Cat" class="cat-photo">
+    </div>
+     <p> <span class="shimmer-text">Gotta be older!!!</span> </p>
+
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                themeBtn.textContent = "Switch to Dark Mode";
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = "Switch to Light Mode";
+            }
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-container');
+            
+            const isGold = Math.random() > 0.5;
+            heart.innerText = isGold ? "💛" : "💚";
+            
+            heart.style.left = Math.random() * 100 + "vw";
+            const duration = Math.random() * 3 + 4; // 4s to 7s
+            heart.style.animationDuration = duration + "s";
+            heart.style.fontSize = Math.random() * 15 + 50 + "px";
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>

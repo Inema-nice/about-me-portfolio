@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nice choice</title>
+    <style>
+        :root {
+            --table-color: black;
+            --paper-color: beige;
+            --shadow-effect: 0px 0px 25px 8px rgba(255, 255, 255, 0.7);
+            --border-style: none;
+        }
+
+        [data-theme="dark"] {
+            --table-color: black;
+            --paper-color: black;
+            --shadow-effect: 0px 0px 25px 8px rgba(255, 255, 255, 0.95);
+            --border-style: 1px solid #333333;
+            .age-input { color: white;}
+        }
+
+        html {
+            background-color: var(--table-color);
+            transition: background-color 0.4s ease;
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            max-width: 800px;
+            width: 90%;
+            background-color: var(--paper-color);
+            margin: 60px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-effect);
+            border: var(--border-style);
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+        }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: 1px solid #555555;
+            background-color: #ffffff;
+            color: #000000;
+            z-index: 1000;
+        }
+
+        p {
+            font-weight: bold;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        h1 { text-align: center; font-size: 50px; font-weight: bold; color: indigo; }
+        h2 { text-align: center; font-size: 30px; font-weight: bold; color: green; }
+        h3 { text-align: center; font-size: 20px; font-weight: bold; color: blueviolet; }
+        
+        .nav-link-wrapper { display: block; text-align: center; margin-top: 30px; text-decoration: none; }
+        .action-btn { padding: 12px 24px; font-size: 16px; font-weight: bold; color: white; background-color: #2c3e50; border: none; border-radius: 8px; cursor: pointer; }
+        .age-check-container {
+            text-align: center;
+            margin: 40px auto 20px auto;
+            padding: 20px;
+        }
+        .input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 280px;
+            margin-bottom: 20px;
+        }
+        .age-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #555555;
+            border-radius: 8px;
+            background-color: var(--paper-color);
+            color: var(--text-color, #333333);
+            text-align: center;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        .hide-placeholder {
+            display: none !important;
+        }
+        .shimmer-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            font-weight: bold;
+            pointer-events: none;
+            white-space: nowrap;
+            background: linear-gradient(to right, blue,aqua,aquamarine,greenyellow,orange,chocolate,blueviolet);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+        .next-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: indigo;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+        .next-btn:hover {
+            background-color: darkblue;
+        }
+        .next-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle-btn" id="themeBtn">Switch Theme</button>
+
+    <h1>I'm glad that you kept going. 😍🤩</h1>
+    <h2>There is something that I would like to know about you. 🧐</h2>
+    <h3>You know in order to receive, you must give! 😂</h3>
+
+    <p style="background-image: linear-gradient(to right, blue, aqua, aquamarine, green, greenyellow, pink, blueviolet, indigo); color: black;">
+        Hope this doesn't bother you, honored guests. 😜. How old are you?
+    </p>
+    <div class="age-check-container">
+        <div class="input-wrapper">
+            <input type="number" id="userAge" class="age-input" placeholder=" ">
+            <span class="shimmer-placeholder" id="placeholderText">Please fill your age</span>
+        </div>
+        <br>
+        <button class="next-btn" id="nextBtn">Next</button>
+    </div>
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                themeBtn.textContent = "Switch to Dark Mode";
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = "Switch to Light Mode";
+            }
+        });
+        const userAgeInput = document.getElementById('userAge');
+        const placeholderText = document.getElementById('placeholderText');
+        userAgeInput.addEventListener('input', () => {
+            if (userAgeInput.value.length > 0) {
+                placeholderText.classList.add('hide-placeholder');
+            } else {
+                placeholderText.classList.remove('hide-placeholder');
+            }
+        });
+        nextBtn.addEventListener('click', () => {
+            const age = parseInt(userAgeInput.value, 10);
+            if (isNaN(age)) {
+                alert("please enter a valid age before moving forward");
+                return;
+            }
+            if (age >=15) {
+                window.location.href = "tryouts4.html";
+            } else {
+                window.location.href = "tryouts3.html";
+            }
+        });
+    </script>
+</body>
+</html>

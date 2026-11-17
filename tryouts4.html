@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- Your Title -->
+    <title>you are in the right place</title>
+    
+    <style>
+        /* 1. Seamless Theme Variables matching your previous pages */
+        :root {
+            --table-color: black;
+            --paper-color: beige;
+            --shadow-effect: 0px 0px 25px 8px rgba(255, 255, 255, 0.7);
+            --border-style: none;
+            --text-color: #333333;
+        }
+
+        [data-theme="dark"] {
+            --table-color: black;
+            --paper-color: black;
+            --shadow-effect: 0px 0px 25px 8px rgba(255, 255, 255, 0.95);
+            --border-style: 1px solid #333333;
+            --text-color: #ffffff;
+        }
+
+        /* 2. Base Page Structure */
+        html {
+            background-color: var(--table-color);
+            transition: background-color 0.4s ease;
+            position: relative;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            max-width: 800px;
+            width: 90%;
+            background-color: var(--paper-color);
+            margin: 60px auto;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-effect);
+            border: var(--border-style);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        /* --- THEME TOGGLE BUTTON --- */
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: 1px solid #555555;
+            background-color: #ffffff;
+            color: #000000;
+            z-index: 1000;
+        }
+
+        /* --- FLEXBOX ENGINE: Top Header Alignment --- */
+        .header-container {
+            display: flex;                  /* Activates Flexbox */
+            flex-direction: column;         /* Stacks items top-to-bottom */
+            align-items: center;            /* Mathematically centers elements horizontally */
+            text-align: center;
+            margin-bottom: 40px;
+            gap: 15px;                      /* Creates clean spacing between welcome! and role models */
+        }
+
+        /* Head 1 */
+        .welcome-title {
+            font-size: 50px;
+            font-weight: bold;
+            color: indigo;
+            margin: 0;
+        }
+
+        /* Head 2 - Shimmer Base */
+        .role-models-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+            
+            /* The Shimmer Reflection Engine */
+            background: linear-gradient(to right, #95a5a6 20%, #ffffff 50%, #95a5a6 80%);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Theme Switch Button -->
+    <button class="theme-toggle-btn" id="themeBtn">Switch Theme</button>
+
+    <!-- Flexbox Container centering your welcome layout -->
+    <div class="header-container">
+        <h1 class="welcome-title">welcome!</h1>
+        <h2 class="role-models-title">my role models</h2>
+    </div>
+
+    <!-- JavaScript Module to connect theme toggling functionality -->
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                themeBtn.textContent = "Switch to Dark Mode";
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = "Switch to Light Mode";
+            }
+        });
+    </script>
+</body>
+</html>
